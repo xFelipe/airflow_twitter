@@ -13,13 +13,6 @@ class TwitterHook(HttpHook):
 
     def create_url(self):
         query =  f"query={self.query}"
-        # Tweet fields are adjustable.
-        # Options include:
-        # attachments, author_id, context_annotations,
-        # conversation_id, created_at, entities, geo, id,
-        # in_reply_to_user_id, lang, non_public_metrics, organic_metrics,
-        # possibly_sensitive, promoted_metrics, public_metrics, referenced_tweets,
-        # source, text, and withheld
         tweet_fields = "tweet.fields=author_id,conversation_id,created_at,id,in_reply_to_user_id,public_metrics,text"
         user_fields = "expansions=author_id&user.fields=id,name,username,created_at"
         start_time = (

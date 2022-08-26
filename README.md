@@ -14,7 +14,8 @@
 
 ## Iniciando (obs: É necessário definir variáveis de ambiente antes)
  - `airflow webserver`
- - `airflow scheduller`
+ - `airflow scheduler`
+ - Definir conexão `twitter_default` como `http` para o link `https://api.twitter.com` com Authorization setando o Bearer token.
  - acessar `localhost:8080`
  
 

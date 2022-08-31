@@ -17,5 +17,7 @@
  - `airflow scheduler`
  - Definir conexão `twitter_default` como `http` para o link `https://api.twitter.com` com Authorization setando o Bearer token.
  - acessar `localhost:8080`
- 
+
+## Execução do spark:
+ - `{spark_path}/bin/spark-submit {project_path}/spark/transformation.py`
 

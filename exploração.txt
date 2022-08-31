@@ -1,0 +1,21 @@
+df = spark.read.json("/home/felipe/projetos/estudos/datapipeline/datalake/bronze/twitter_aluraonline")
+df.show()
+df.printSchema()
+df.select(f.explode('data').alias('tweets')).select('tweets.*').show(1, False)
+
+from pyspark.sql import functions as f
+
+tweet_df = df.select(f.explode('data').alias('tweets')).select('tweets.author_id', 'tweets.conversation_id', 'tweets.created_at', 'tweets.id', 'tweets.in_reply_to_user_id', 'tweets.public_metrics.*', 'tweets.text')
+users_df = df.select(f.explode('includes.users').alias('u')).select('u.*')
+
+tweet_df.write.mode("overwrite").option("header", True).csv('/home/felipe/projetos/estudos/datapipeline/datalake/bronze/export')
+
+# Altera numero de partições
+tweet_df.rdd.getNumPartitions()
+tweet_df.repartition(1).write.mode("overwrite").option("header", True).csv('/home/felipe/projetos/estudos/datapipeline/datalake/bronze/export')
+
+# Diminui numero de partições, juntando partições inteiras
+tweet_df.repartition(5).coalesce(2).write.mode("overwrite").option("header", True).csv('/home/felipe/projetos/estudos/datapipeline/datalake/bronze/export')
+
+tweet_df.groupBy(f.to_date('created_at')).count().show()
+export_df.write.mode('overwrite').partitionBy('created_date').json('/home/felipe/projetos/estudos/datapipeline/datalake/bronze/export')

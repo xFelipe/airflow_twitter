@@ -19,3 +19,6 @@ tweet_df.repartition(5).coalesce(2).write.mode("overwrite").option("header", Tru
 
 tweet_df.groupBy(f.to_date('created_at')).count().show()
 export_df.write.mode('overwrite').partitionBy('created_date').json('/home/felipe/projetos/estudos/datapipeline/datalake/bronze/export')
+
+
+/home/felipe/programas/spark-3.1.3-bin-hadoop3.2/bin/spark-submit /home/felipe/projetos/estudos/datapipeline/spark/transformation.py --src /home/felipe/projetos/estudos/datapipeline/datalake/bronze/twitter_aluraonline/extract_date=2022-08-25 --dest /home/felipe/projetos/estudos/datapipeline/datalake/silver/twitter_aluraonline --process-date 2022-09-01

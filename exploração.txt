@@ -22,3 +22,5 @@ export_df.write.mode('overwrite').partitionBy('created_date').json('/home/felipe
 
 
 /home/felipe/programas/spark-3.1.3-bin-hadoop3.2/bin/spark-submit /home/felipe/projetos/estudos/datapipeline/spark/transformation.py --src /home/felipe/projetos/estudos/datapipeline/datalake/bronze/twitter_aluraonline/extract_date=2022-08-25 --dest /home/felipe/projetos/estudos/datapipeline/datalake/silver/twitter_aluraonline --process-date 2022-09-01
+
+airflow tasks test twitter_dag transform_twitter_aluraonline 2022-08-29
